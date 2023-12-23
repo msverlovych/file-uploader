@@ -1,0 +1,114 @@
+.wrapper {
+    padding: 2rem 0;
+    flex-direction: column;
+}
+
+.card {
+    display: none;
+    max-width: 100%;
+    border-radius: 10px;
+    background: var(--bg-white);
+    padding: 1rem;
+    box-shadow: var(--shadow-card);
+}
+
+.card .card-block {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card .card-block .preview {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card .card-block .actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+
+    @media (max-width: 425px) {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+}
+
+.card .card-block .preview .preview-image {
+    position: relative;
+}
+
+.preview-image .preview-image__remove {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-black);
+    height: 12px;
+    width: 12px;
+    cursor: pointer;
+    position: absolute;
+    top: 14px;
+    left: 14px;
+}
+
+.preview-image:hover img {
+    box-shadow: var(--shadow-image);
+}
+
+.preview-image:hover .preview-image__remove {
+    display: flex;
+}
+
+.preview-image .preview-info {
+    position: absolute;
+    bottom: 4.5px;
+    left: 0;
+    right: 0;
+    padding: 0 8px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    background-color: var(--bg-gray);
+    backdrop-filter: blur(4px);
+    background-blend-mode: multiply;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.preview-image .preview-info__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 25px;
+    background: var(--bg-purple-light);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transition: width .22s;
+}
+
+.preview-image .preview-info__progress .progress-content {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-white);
+}
+
+
+.preview-image .preview-info .preview-info__name, .preview-info__size {
+    font-size: 18px;
+}
+
+.preview-image:hover .preview-info {
+    display: flex;
+}
+
+.is-removing {
+    transform: scaleY(0);
+    transition: transform .2s;
+}

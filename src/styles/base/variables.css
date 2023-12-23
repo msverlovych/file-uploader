@@ -1,0 +1,20 @@
+:root {
+    --main-bg-color: #242530;
+    --bg-black: #1c1c1c;
+    --bg-purple: #513d75;
+    --bg-black-light: rgba(0, 0, 0, 0.26);
+    --bg-gray: rgba(255, 255, 255, .5);
+    --bg-purple-light: rgba(81, 61, 117, 0.59);
+    --bg-white: #ebebeb;
+
+    --color-white: #faebd7;
+    --color-bello: #5adace;
+    --color-purple: #985eff;
+
+    --shadow-button-active: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
+    --shadow-button-hover: 0px 5px 10px #00000097;
+    --shadow-card: 0px 4px 24px 0px black;
+    --shadow-image: 6px 6px 15px rgba(0, 0, 0, 0.5);
+
+    --text-liner-gradient: linear-gradient(to right,#1b7ce2,#f845c7,#7957ff);
+}
