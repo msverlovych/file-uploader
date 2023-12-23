@@ -4,9 +4,10 @@ import { firebaseConfig } from './firebase-config.js'
 
 initializeApp(firebaseConfig)
 
-const storage = getStorage()
-
 export const uploadFiles = (files, preview) => {
+    const storage = getStorage()
+    let uploadPromises = []
+
     files.forEach((file, index) => {
         const metadata = {
             contentType: file.mimetype 
@@ -15,17 +16,24 @@ export const uploadFiles = (files, preview) => {
         const fileRef = ref(storage, `images/${file.name}`)
         const uploadTask = uploadBytesResumable(fileRef, file, metadata)
 
-        uploadTask.on('state_changed', snapshot => {
-            const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100).toFixed(0)
-            const blocks = preview[index].querySelector('.preview-info__progress')
-            const blocksInfo = blocks.querySelector('.progress-content')
-
-            blocksInfo.textContent = progress + '%';
-            blocks.style.width = progress + '%'
-        }, error => {
-            console.log(error)
-        }, () => {
-            getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => downloadURL)
+        const uplaodPromise = new Promise((resolve, reject) => {
+            uploadTask.on('state_changed', snapshot => {
+                const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100).toFixed(0)
+                const blocks = preview[index].querySelector('.preview-info__progress')
+                const blocksInfo = blocks.querySelector('.progress-content')
+    
+                blocksInfo.textContent = progress + '%';
+                blocks.style.width = progress + '%'
+            }, error => {
+                reject(error)
+                console.log(error)
+            }, () => {
+                getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => resolve(downloadURL))
+            })
         })
+
+        uploadPromises.push(uplaodPromise)
     })
+
+    return Promise.all(uploadPromises)
 }
