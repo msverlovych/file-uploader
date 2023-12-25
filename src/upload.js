@@ -91,6 +91,8 @@ export class Upload {
     }
 
     handleInputChange(event) {
+        this.openTemplateBtn.removeEventListener('click', this.createUploadTemplate)
+
         if (!event.target.files.length) {
             this.#cardBlock.classList.remove('gap-3')
             return
