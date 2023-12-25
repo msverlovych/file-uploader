@@ -25,8 +25,7 @@ export const uploadFiles = (files, preview) => {
                 blocksInfo.textContent = progress + '%';
                 blocks.style.width = progress + '%'
             }, error => {
-                reject(error)
-                console.log(error)
+                reject(new Error(error))
             }, () => {
                 getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => resolve(downloadURL))
             })
